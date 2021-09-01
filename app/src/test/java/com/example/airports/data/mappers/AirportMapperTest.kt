@@ -1,6 +1,6 @@
 package com.example.airports.data.mappers
 
-import com.example.airports.data.AirportEntity
+import com.example.airports.data.entities.AirportEntity
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test

@@ -1,6 +1,6 @@
 package com.example.airports.data.mappers
 
-import com.example.airports.data.FlightEntity
+import com.example.airports.data.entities.FlightEntity
 import com.example.airports.domain.Flight
 import javax.inject.Inject
 

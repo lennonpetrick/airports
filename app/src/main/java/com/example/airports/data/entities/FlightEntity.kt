@@ -1,4 +1,4 @@
-package com.example.airports.data
+package com.example.airports.data.entities
 
 internal class FlightEntity(
     val airlineId: String,

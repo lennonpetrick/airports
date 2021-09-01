@@ -1,7 +1,7 @@
-package com.example.airports.data.datasource
+package com.example.airports.data.datasources
 
-import com.example.airports.data.AirportEntity
-import com.example.airports.data.FlightEntity
+import com.example.airports.data.entities.AirportEntity
+import com.example.airports.data.entities.FlightEntity
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 
