@@ -3,7 +3,7 @@ package com.example.airports.data.repositories
 import com.example.airports.data.datasources.FlightNetworkDataSource
 import com.example.airports.data.entities.FlightEntity
 import com.example.airports.data.mappers.FlightMapper
-import com.example.airports.domain.Flight
+import com.example.airports.domain.models.Flight
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.rxjava3.core.Single
 import org.junit.jupiter.api.Test

@@ -1,7 +1,7 @@
 package com.example.airports.data.mappers
 
 import com.example.airports.data.entities.AirportEntity
-import com.example.airports.domain.Airport
+import com.example.airports.domain.models.Airport
 import javax.inject.Inject
 
 internal class AirportMapper @Inject constructor() {

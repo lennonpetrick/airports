@@ -1,4 +1,4 @@
-package com.example.airports.domain
+package com.example.airports.domain.models
 
 internal class Flight(
     val airlineId: String,
