@@ -1,10 +1,9 @@
 package com.example.airports.domain.usecases
 
+import com.example.airports.TestFactory.createAirport
 import com.example.airports.assertLastValue
 import com.example.airports.common.DistanceHelper
 import com.example.airports.data.repositories.AirportRepository
-import com.example.airports.domain.models.Airport
-import com.example.airports.domain.usecases.GetAllAirportsUseCase
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.rxjava3.core.Single
 import org.junit.jupiter.api.Test
@@ -85,9 +84,4 @@ internal class GetAllAirportsUseCaseTest {
             .assertLastValue { result -> result.furthestAirports == null }
     }
 
-    private fun createAirport(latitude: Double = Double.MAX_VALUE,
-                              longitude: Double = Double.MAX_VALUE): Airport {
-        return Airport("id", latitude, longitude,
-            "name", "city", "countryId")
-    }
 }

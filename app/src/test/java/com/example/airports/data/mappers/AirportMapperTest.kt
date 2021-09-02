@@ -1,6 +1,6 @@
 package com.example.airports.data.mappers
 
-import com.example.airports.data.entities.AirportEntity
+import com.example.airports.TestFactory.createAirportEntity
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -11,7 +11,7 @@ internal class AirportMapperTest {
 
     @Test
     fun `When converting an airport entity to a model, then it converts properly`() {
-        val entity = createEntity()
+        val entity = createAirportEntity()
         val model = subject.convert(entity)
 
         assertAll("Airport fields", {
@@ -24,8 +24,4 @@ internal class AirportMapperTest {
         })
     }
 
-    private fun createEntity(): AirportEntity {
-        return AirportEntity("id", Double.MAX_VALUE, Double.MAX_VALUE,
-            "name", "city", "countryId")
-    }
 }
