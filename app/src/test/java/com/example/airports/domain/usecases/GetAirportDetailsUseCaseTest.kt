@@ -86,4 +86,15 @@ internal class GetAirportDetailsUseCaseTest {
             }
     }
 
+    @Test
+    fun `When getting airports fails, then it returns an error`() {
+        val exception = Throwable()
+        whenever(repository.getAirports()).thenReturn(Single.error(exception))
+
+        val observer = subject.get("AAA").test()
+
+        observer.assertNoValues()
+            .assertError(exception)
+    }
+
 }

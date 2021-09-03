@@ -1,5 +1,6 @@
 package com.example.airports.domain.usecases
 
+import com.example.airports.TestFactory
 import com.example.airports.TestFactory.createAirport
 import com.example.airports.assertLastValue
 import com.example.airports.common.DistanceHelper
@@ -84,4 +85,14 @@ internal class GetAllAirportsUseCaseTest {
             .assertLastValue { result -> result.furthestAirports == null }
     }
 
+    @Test
+    fun `When getting airports fails, then it returns an error`() {
+        val exception = Throwable()
+        whenever(repository.getAirports()).thenReturn(Single.error(exception))
+
+        val observer = subject.get().test()
+
+        observer.assertNoValues()
+            .assertError(exception)
+    }
 }
