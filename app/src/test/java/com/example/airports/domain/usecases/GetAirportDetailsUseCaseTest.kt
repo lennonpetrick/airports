@@ -4,6 +4,7 @@ import com.example.airports.TestFactory.createAirport
 import com.example.airports.assertLastValue
 import com.example.airports.common.DistanceHelper
 import com.example.airports.data.repositories.AirportRepository
+import com.example.airports.domain.DistanceUnit
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.rxjava3.core.Single
 import org.junit.jupiter.api.Test
@@ -44,20 +45,23 @@ internal class GetAirportDetailsUseCaseTest {
         val airport1 = createAirport(airportId = "AAA", latitude = 13423.23, longitude = 543.3245)
         val airport2 = createAirport(airportId = "BBB", latitude = 987.0, longitude = 654.87434)
         val airport3 = createAirport(airportId = "CCC", latitude = 45.09, longitude = 8765.87)
+        val distance = 5.0
         whenever(repository.getAirports()).thenReturn(Single.just(listOf(airport1, airport2, airport3)))
 
         whenever(distanceHelper.calculate(airport1.latitude, airport1.longitude,
-            airport2.latitude, airport2.longitude)).thenReturn(5.6)
+            airport2.latitude, airport2.longitude)).thenReturn(distance*2)
 
         whenever(distanceHelper.calculate(airport1.latitude, airport1.longitude,
-            airport3.latitude, airport3.longitude)).thenReturn(3.4)
+            airport3.latitude, airport3.longitude)).thenReturn(distance)
 
         val observer = subject.get("AAA").test()
 
         observer.assertNoErrors()
             .assertLastValue { result ->
                 result is GetAirportDetailsUseCase.Result.Value
-                        && result.nearestAirport == airport3
+                        && result.nearestAirport!!.airport == airport3
+                        && result.nearestAirport.distance == distance
+                        && result.nearestAirport.unit == DistanceUnit.KM
             }
     }
 
