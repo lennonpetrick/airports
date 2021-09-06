@@ -3,6 +3,7 @@ package com.example.airports.domain.usecases
 import com.example.airports.common.DistanceHelper
 import com.example.airports.data.repositories.AirportRepository
 import com.example.airports.data.repositories.FlightRepository
+import com.example.airports.domain.DistanceUnit
 import com.example.airports.domain.models.Airport
 import com.example.airports.domain.models.Flight
 import io.reactivex.rxjava3.core.Single
@@ -39,7 +40,7 @@ internal class GetSchipholReachableAirportsUseCase @Inject constructor(
                 airportsMap[it]?.also { airport ->
                     val distance = distanceHelper.calculate(schiphol.latitude, schiphol.longitude,
                         airport.latitude, airport.longitude)
-                    airportWithDistanceList.add(AirportWithDistance(airport, distance))
+                    airportWithDistanceList.add(AirportWithDistance(airport, distance, DistanceUnit.KM)) //Todo distance unit
                 }
             }
         }
@@ -58,5 +59,5 @@ internal class GetSchipholReachableAirportsUseCase @Inject constructor(
         return airportIdsSet
     }
 
-    internal class AirportWithDistance(val airport: Airport, val distance: Double)
+    internal class AirportWithDistance(val airport: Airport, val distance: Double, val unit: DistanceUnit)
 }

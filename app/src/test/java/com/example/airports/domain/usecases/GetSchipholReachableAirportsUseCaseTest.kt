@@ -6,6 +6,7 @@ import com.example.airports.assertLastValue
 import com.example.airports.common.DistanceHelper
 import com.example.airports.data.repositories.AirportRepository
 import com.example.airports.data.repositories.FlightRepository
+import com.example.airports.domain.DistanceUnit
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.rxjava3.core.Single
 import org.junit.jupiter.api.Test
@@ -48,7 +49,12 @@ internal class GetSchipholReachableAirportsUseCaseTest {
         val observer = subject.get().test()
 
         observer.assertNoErrors()
-            .assertLastValue { result -> result[0].let { it.airport == airport && it.distance == distance } }
+            .assertLastValue { result ->
+                result[0].let {
+                    it.airport == airport
+                        && it.distance == distance
+                        && it.unit == DistanceUnit.KM
+                }}
     }
 
     @Test
