@@ -32,6 +32,7 @@ sealed class NavigationItem(val route: String,
         }
     }
 
+    // Todo show label from strings
     object AirportMap: NavigationItem(route = "airport_map", label = "Map", icon = Icons.Default.Map)
     object AirportList: NavigationItem(route = "airport_list", label = "From Schiphol", icon = Icons.Default.List)
     object Settings: NavigationItem(route = "settings", label = "Settings", icon = Icons.Default.Settings)
