@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Airports</string>
-    <string name="distance_km">%d Km</string>
-    <string name="distance_mile">%d Mi</string>
+    <string name="distance_km">%s Km</string>
+    <string name="distance_mile">%s Mi</string>
 </resources>

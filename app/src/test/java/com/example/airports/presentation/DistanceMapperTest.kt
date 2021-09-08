@@ -15,26 +15,26 @@ internal class DistanceMapperTest {
     @Test
     fun `When converting KM distance, then it converts properly`() {
         val unit = DistanceUnit.KM
-        val distance = 1.0
+        val distance = 1.1235
 
         val displayText = subject.convert(distance, unit)
 
         with(displayText) {
             assertEquals(R.string.distance_km, text)
-            assertEquals(distance, argValue)
+            assertEquals("1.12", argValue)
         }
     }
 
     @Test
     fun `When converting MI distance, then it converts properly`() {
         val unit = DistanceUnit.MI
-        val distance = 1.0
+        val distance = 1.12345
 
         val displayText = subject.convert(distance, unit)
 
         with(displayText) {
             assertEquals(R.string.distance_mile, text)
-            assertEquals(distance, argValue)
+            assertEquals("1.12", argValue)
         }
     }
 

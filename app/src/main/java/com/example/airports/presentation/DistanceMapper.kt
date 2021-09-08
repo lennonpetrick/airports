@@ -17,10 +17,10 @@ internal class DistanceMapper @Inject constructor() {
         return DisplayText(stringRes, round(distance))
     }
 
-    private fun round(value: Double): Double {
+    private fun round(value: Double): String {
         return BigDecimal.valueOf(value)
-            .apply { setScale(2, RoundingMode.HALF_UP) }
-            .toDouble()
+            .setScale(2, RoundingMode.HALF_UP)
+            .toString()
     }
 
 }
