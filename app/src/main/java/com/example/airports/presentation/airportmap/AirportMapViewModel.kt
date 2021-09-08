@@ -20,7 +20,6 @@ internal class AirportMapViewModel(
     }
 
     private fun getAllAirports() {
-        postState(AirportMapState.Loading)
         useCase.get()
             .map { result ->
                 val list = result.airports.map {
@@ -36,7 +35,6 @@ internal class AirportMapViewModel(
 }
 
 internal sealed class AirportMapState: ViewState {
-    object Loading : AirportMapState()
     object Error : AirportMapState()
     @Immutable class Loaded(val airports: List<AirportMapView>) : AirportMapState()
 }

@@ -2,7 +2,6 @@ package com.example.airports.presentation.airportmap
 
 import com.example.airports.InstantExecutorExtension
 import com.example.airports.assertLastValue
-import com.example.airports.assertValueAt
 import com.example.airports.domain.models.Airport
 import com.example.airports.domain.usecases.GetAllAirportsUseCase
 import com.example.airports.observeStates
@@ -49,8 +48,7 @@ internal class AirportMapViewModelTest {
         val state = subject.observeStates<AirportMapState>()
         subject.onCreate()
 
-        state.assertValueAt(0) { it is AirportMapState.Loading }
-            .assertLastValue {
+        state.assertLastValue {
                 it is AirportMapState.Loaded
                         && it.airports == listOf(airportMapView)
             }
@@ -63,8 +61,7 @@ internal class AirportMapViewModelTest {
         val state = subject.observeStates<AirportMapState>()
         subject.onCreate()
 
-        state.assertValueAt(0) { it is AirportMapState.Loading }
-            .assertLastValue { it is AirportMapState.Error }
+        state.assertLastValue { it is AirportMapState.Error }
     }
 
 }
