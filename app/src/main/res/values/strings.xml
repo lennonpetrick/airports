@@ -2,4 +2,5 @@
     <string name="app_name">Airports</string>
     <string name="distance_km">%s Km</string>
     <string name="distance_mile">%s Mi</string>
+    <string name="generic_error">Something went wrong :(</string>
 </resources>
