@@ -42,7 +42,7 @@ internal class AirportListViewModelTest {
 
     @ParameterizedTest
     @EnumSource(value = DistanceUnit::class)
-    fun `When the ViewModel is created, then AirportListViewModel list is fetched`(unit: DistanceUnit) {
+    fun `When the ViewModel is created, then a list of AirportListView is fetched`(unit: DistanceUnit) {
         val airport = mock<Airport>()
         val airportListView = mock<AirportListView>()
         val distance = 1.0
