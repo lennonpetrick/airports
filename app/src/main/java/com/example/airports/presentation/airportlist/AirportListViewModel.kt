@@ -1,10 +1,9 @@
 package com.example.airports.presentation.airportlist
 
 import androidx.compose.runtime.Immutable
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.airports.domain.usecases.GetSchipholReachableAirportsUseCase
 import com.example.airports.presentation.BaseViewModel
+import com.example.airports.presentation.ViewState
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
@@ -16,12 +15,26 @@ internal class AirportListViewModel(
     compositeDisposable: CompositeDisposable
 ) : BaseViewModel(workScheduler, uiScheduler, compositeDisposable) {
 
-    private val _state = MutableLiveData<ViewState>()
-    val state: LiveData<ViewState> = _state
+    override fun onCreate() {
+        getAirportList()
+    }
+
+    private fun getAirportList() {
+        postState(AirportListState.Loading)
+        useCase.get()
+            .flattenAsObservable { it }
+            .map { mapper.convert(it.airport, it.distance, it.unit) }
+            .toList()
+            .map(AirportListState::Loaded)
+            .applySchedulers()
+            .subscribe(::postState) { postState(AirportListState.Error) }
+            .disposeInOnCleared()
+    }
 
 }
 
-internal sealed class ViewState {
-    @Immutable class Error(val errorMessage: String?) : ViewState()
-    @Immutable class Loaded(val airportList: List<AirportListView>) : ViewState()
+internal sealed class AirportListState: ViewState {
+    object Loading : AirportListState()
+    object Error : AirportListState()
+    @Immutable class Loaded(val airportList: List<AirportListView>) : AirportListState()
 }
