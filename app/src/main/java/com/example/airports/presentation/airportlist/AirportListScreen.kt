@@ -3,13 +3,11 @@ package com.example.airports.presentation.airportlist
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -19,6 +17,7 @@ import com.example.airports.R
 import com.example.airports.di.daggerViewModel
 import com.example.airports.presentation.DisplayText
 import com.example.airports.presentation.components.GenericError
+import com.example.airports.presentation.components.Loading
 
 @Composable
 internal fun AirportListScreen(
@@ -33,17 +32,6 @@ internal fun AirportListScreen(
             is AirportListState.Loaded -> AirportList(airportList)
             is AirportListState.Error -> GenericError()
         }
-    }
-}
-
-@Composable
-internal fun Loading() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        CircularProgressIndicator()
     }
 }
 
@@ -91,12 +79,6 @@ internal fun ItemText(
         maxLines = 1,
         overflow = overflow
     )
-}
-
-@Preview
-@Composable
-internal fun LoadingPreview() {
-    Loading()
 }
 
 @Preview
