@@ -26,7 +26,9 @@ internal fun AirportMapScreen(
     MapView { renderer ->
         state?.apply {
             when (this) {
-                is AirportMapState.Loaded -> renderer.addAirportsOnMap(airports)
+                is AirportMapState.Loaded -> renderer.addAirportsOnMap(context, airports) {
+                    //todo open details
+                }
                 is AirportMapState.Error -> showGenericError(context)
             }
         }
