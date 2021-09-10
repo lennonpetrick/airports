@@ -3,6 +3,7 @@ package com.example.airports.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -33,6 +34,11 @@ open class BaseViewModel(
     }
 
     protected fun <T> Single<T>.applySchedulers(): Single<T> {
+        return this.subscribeOn(workScheduler)
+            .observeOn(uiScheduler)
+    }
+
+    protected fun <T> Observable<T>.applySchedulers(): Observable<T> {
         return this.subscribeOn(workScheduler)
             .observeOn(uiScheduler)
     }
