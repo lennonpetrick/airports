@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.airports.R
 import com.example.airports.di.daggerViewModel
+import com.example.airports.presentation.airportdetails.AirportDetailsActivity
 import com.example.airports.presentation.airportmap.map.MapRenderer
 import com.example.airports.presentation.airportmap.map.rememberMapViewWithLifecycle
 
@@ -27,7 +28,7 @@ internal fun AirportMapScreen(
         state?.apply {
             when (this) {
                 is AirportMapState.Loaded -> renderer.addAirportsOnMap(context, airports) {
-                    //todo open details
+                    AirportDetailsActivity.start(context, it.id)
                 }
                 is AirportMapState.Error -> showGenericError(context)
             }

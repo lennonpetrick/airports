@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     @Composable
-    fun MainScreen(topBarTitle: String) {
+    private fun MainScreen(topBarTitle: String) {
         val navController = rememberNavController()
         val navItems = NavigationItem.getList()
 
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     @Composable
     @Preview
-    fun Preview() {
+    private fun Preview() {
         MainScreen("Airports")
     }
 

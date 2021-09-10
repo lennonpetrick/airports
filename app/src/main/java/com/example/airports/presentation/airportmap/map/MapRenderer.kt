@@ -5,7 +5,6 @@ import android.content.Context
 import com.example.airports.presentation.airportmap.AirportMapView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
@@ -24,7 +23,6 @@ internal class MapRenderer(val map: GoogleMap) {
         clusterManager.renderer = clusterRenderer
 
         clusterManager.setOnClusterItemClickListener {
-            zoomTo(it.position)
             onMarkerClick(it)
             true
         }
@@ -49,7 +47,4 @@ internal class MapRenderer(val map: GoogleMap) {
         map.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 100))
     }
 
-    private fun zoomTo(latLng: LatLng) {
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, map.cameraPosition.zoom * 1.70f))
-    }
 }

@@ -1,15 +1,33 @@
 package com.example.airports.presentation.components
 
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.airports.presentation.NavigationItem
 
+@Preview
 @Composable
-fun TopBar(title: String) {
-    TopAppBar(title = { Text(text = title) })
+fun TopBarPreview() {
+    TopBar("TopBar")
+}
+
+@Composable
+fun TopBar(title: String, onBackClick: (() -> Unit)? = null) {
+    TopAppBar(
+        title = { Text(text = title) },
+        navigationIcon = onBackClick?.let {
+            {
+                IconButton(onClick = it) {
+                    Icon(Icons.Default.ArrowBack, contentDescription = "")
+                }
+            }
+        }
+    )
 }
 
 @Composable
