@@ -1,4 +1,4 @@
-package com.example.airports.data.datasources
+package com.example.airports.data.datasources.network
 
 import com.example.airports.data.entities.FlightEntity
 import com.nhaarman.mockito_kotlin.mock

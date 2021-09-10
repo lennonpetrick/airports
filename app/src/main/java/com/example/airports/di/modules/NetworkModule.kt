@@ -1,7 +1,7 @@
 package com.example.airports.di.modules
 
 import com.example.airports.BuildConfig
-import com.example.airports.data.datasources.ApiService
+import com.example.airports.data.datasources.network.ApiService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module

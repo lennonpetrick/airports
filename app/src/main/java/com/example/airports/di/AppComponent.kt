@@ -1,6 +1,6 @@
 package com.example.airports.di
 
-import com.example.airports.data.datasources.ApiService
+import com.example.airports.data.datasources.network.ApiService
 import com.example.airports.di.modules.NetworkModule
 import com.example.airports.di.modules.SchedulerModule
 import com.example.airports.di.qualifiers.IOScheduler

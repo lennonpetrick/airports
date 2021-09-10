@@ -1,6 +1,6 @@
 package com.example.airports.data.repositories
 
-import com.example.airports.data.datasources.AirportNetworkDataSource
+import com.example.airports.data.datasources.network.AirportNetworkDataSource
 import com.example.airports.data.mappers.AirportMapper
 import com.example.airports.domain.models.Airport
 import io.reactivex.rxjava3.core.Single

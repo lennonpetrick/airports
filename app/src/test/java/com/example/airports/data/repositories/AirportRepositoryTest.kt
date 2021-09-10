@@ -1,6 +1,6 @@
 package com.example.airports.data.repositories
 
-import com.example.airports.data.datasources.AirportNetworkDataSource
+import com.example.airports.data.datasources.network.AirportNetworkDataSource
 import com.example.airports.data.entities.AirportEntity
 import com.example.airports.data.mappers.AirportMapper
 import com.example.airports.domain.models.Airport
