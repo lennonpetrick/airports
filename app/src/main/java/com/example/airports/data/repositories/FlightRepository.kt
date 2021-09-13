@@ -5,7 +5,9 @@ import com.example.airports.data.mappers.FlightMapper
 import com.example.airports.domain.models.Flight
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 internal class FlightRepository @Inject constructor(
     private val dataSource: FlightNetworkDataSource,
     private val mapper: FlightMapper

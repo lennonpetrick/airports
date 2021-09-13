@@ -6,7 +6,9 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.subjects.PublishSubject
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 internal class SettingsRepository @Inject constructor(private val dataSource: SettingsLocalDataSource) {
 
     private val subject = PublishSubject.create<DistanceUnit>()

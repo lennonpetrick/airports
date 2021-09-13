@@ -1,7 +1,8 @@
 package com.example.airports.di
 
-import android.content.SharedPreferences
-import com.example.airports.data.datasources.network.ApiService
+import com.example.airports.data.repositories.AirportRepository
+import com.example.airports.data.repositories.FlightRepository
+import com.example.airports.data.repositories.SettingsRepository
 import com.example.airports.di.modules.LocalModule
 import com.example.airports.di.modules.NetworkModule
 import com.example.airports.di.modules.SchedulerModule
@@ -21,8 +22,10 @@ internal interface AppComponent {
     @UIScheduler
     fun uiScheduler(): Scheduler
 
-    fun apiService(): ApiService
+    fun flightRepository(): FlightRepository
 
-    fun sharedPreferences(): SharedPreferences
+    fun airportRepository(): AirportRepository
+
+    fun settingsRepository(): SettingsRepository
 
 }

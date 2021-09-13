@@ -9,7 +9,7 @@ import com.example.airports.domain.usecases.GetSchipholReachableAirportsUseCase
 import com.example.airports.observeStates
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.junit.jupiter.api.BeforeEach
@@ -47,7 +47,7 @@ internal class AirportListViewModelTest {
         val airportListView = mock<AirportListView>()
         val distance = 1.0
         val airportWithDistance = GetSchipholReachableAirportsUseCase.AirportWithDistance(airport, distance, unit)
-        whenever(useCase.get()).thenReturn(Single.just(listOf(airportWithDistance)))
+        whenever(useCase.get()).thenReturn(Observable.just(listOf(airportWithDistance)))
         whenever(mapper.convert(airport, distance, unit)).thenReturn(airportListView)
 
         val state = subject.observeStates<AirportListState>()
@@ -62,7 +62,7 @@ internal class AirportListViewModelTest {
 
     @Test
     fun `When fetching the list and it fails, then an error is returned`() {
-        whenever(useCase.get()).thenReturn(Single.error(Throwable()))
+        whenever(useCase.get()).thenReturn(Observable.error(Throwable()))
 
         val state = subject.observeStates<AirportListState>()
         subject.onCreate()

@@ -22,9 +22,7 @@ internal class AirportListViewModel(
     private fun getAirportList() {
         postState(AirportListState.Loading)
         useCase.get()
-            .flattenAsObservable { it }
-            .map { mapper.convert(it.airport, it.distance, it.unit) }
-            .toList()
+            .map { list -> list.map { mapper.convert(it.airport, it.distance, it.unit) } }
             .map(AirportListState::Loaded)
             .applySchedulers()
             .subscribe(::postState) { postState(AirportListState.Error) }
