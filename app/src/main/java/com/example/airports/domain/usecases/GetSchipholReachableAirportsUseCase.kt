@@ -3,16 +3,18 @@ package com.example.airports.domain.usecases
 import com.example.airports.common.DistanceHelper
 import com.example.airports.data.repositories.AirportRepository
 import com.example.airports.data.repositories.FlightRepository
+import com.example.airports.data.repositories.SettingsRepository
 import com.example.airports.domain.DistanceUnit
 import com.example.airports.domain.models.Airport
 import com.example.airports.domain.models.Flight
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.core.Observable
 import java.util.*
 import javax.inject.Inject
 
 internal class GetSchipholReachableAirportsUseCase @Inject constructor(
     private val airportRepository: AirportRepository,
     private val flightRepository: FlightRepository,
+    private val settingsRepository: SettingsRepository,
     private val distanceHelper: DistanceHelper
 ) {
 
@@ -20,17 +22,18 @@ internal class GetSchipholReachableAirportsUseCase @Inject constructor(
         const val SCHIPHOL_ID = "AMS"
     }
 
-    fun get(): Single<List<AirportWithDistance>> {
-        return flightRepository.getFlights()
-            .map(::mapToAirportIds)
-            .flatMap { airportIds ->
-                airportRepository.getAirports()
-                    .map { mapToAirportWithDistance(airportIds, it) }
-            }
+    fun get(): Observable<List<AirportWithDistance>> {
+        return Observable.combineLatest(
+            flightRepository.getFlights().map(::mapToAirportIds).toObservable(),
+            airportRepository.getAirports().toObservable(),
+            settingsRepository.getDistanceUnit(),
+            ::mapToAirportWithDistance
+        )
     }
 
     private fun mapToAirportWithDistance(airportIds: Set<String>,
-                                         airports: List<Airport>): List<AirportWithDistance> {
+                                         airports: List<Airport>,
+                                         unit: DistanceUnit): List<AirportWithDistance> {
         val airportsMap = airports.map { it.id to it }.toMap()
         val schiphol = airportsMap[SCHIPHOL_ID]
         val airportWithDistanceList = LinkedList<AirportWithDistance>()
@@ -39,8 +42,8 @@ internal class GetSchipholReachableAirportsUseCase @Inject constructor(
             airportIds.forEach {
                 airportsMap[it]?.also { airport ->
                     val distance = distanceHelper.calculate(schiphol.latitude, schiphol.longitude,
-                        airport.latitude, airport.longitude)
-                    airportWithDistanceList.add(AirportWithDistance(airport, distance, DistanceUnit.KM)) //Todo distance unit
+                        airport.latitude, airport.longitude, unit)
+                    airportWithDistanceList.add(AirportWithDistance(airport, distance, unit))
                 }
             }
         }

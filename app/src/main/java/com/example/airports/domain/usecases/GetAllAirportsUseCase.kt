@@ -2,6 +2,7 @@ package com.example.airports.domain.usecases
 
 import com.example.airports.common.DistanceHelper
 import com.example.airports.data.repositories.AirportRepository
+import com.example.airports.domain.DistanceUnit
 import com.example.airports.domain.models.Airport
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
@@ -10,6 +11,10 @@ internal class GetAllAirportsUseCase @Inject constructor(
     private val repository: AirportRepository,
     private val distanceHelper: DistanceHelper
 ) {
+
+    companion object {
+        val DEFAULT_UNIT = DistanceUnit.KM
+    }
 
     fun get(): Single<Result> {
         return repository.getAirports()
@@ -28,7 +33,8 @@ internal class GetAllAirportsUseCase @Inject constructor(
                 val airport2 = airports[index2]
                 val distance = distanceHelper.calculate(
                     airport1.latitude, airport1.longitude,
-                    airport2.latitude, airport2.longitude
+                    airport2.latitude, airport2.longitude,
+                    DEFAULT_UNIT
                 )
 
                 if (distance > maxDistance) {

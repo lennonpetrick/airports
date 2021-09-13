@@ -1,10 +1,10 @@
 package com.example.airports.domain.usecases
 
-import com.example.airports.TestFactory
 import com.example.airports.TestFactory.createAirport
 import com.example.airports.assertLastValue
 import com.example.airports.common.DistanceHelper
 import com.example.airports.data.repositories.AirportRepository
+import com.example.airports.domain.DistanceUnit
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.rxjava3.core.Single
 import org.junit.jupiter.api.Test
@@ -15,6 +15,10 @@ import org.mockito.junit.jupiter.MockitoExtension
 
 @ExtendWith(MockitoExtension::class)
 internal class GetAllAirportsUseCaseTest {
+
+    companion object {
+        val DEFAULT_UNIT = DistanceUnit.KM
+    }
 
     @Mock
     private lateinit var repository: AirportRepository
@@ -44,13 +48,13 @@ internal class GetAllAirportsUseCaseTest {
         whenever(repository.getAirports()).thenReturn(Single.just(listOf(airport1, airport2, airport3)))
 
         whenever(distanceHelper.calculate(airport1.latitude, airport1.longitude,
-            airport2.latitude, airport2.longitude)).thenReturn(1.0)
+            airport2.latitude, airport2.longitude, DEFAULT_UNIT)).thenReturn(1.0)
 
         whenever(distanceHelper.calculate(airport1.latitude, airport1.longitude,
-            airport3.latitude, airport3.longitude)).thenReturn(2.0)
+            airport3.latitude, airport3.longitude, DEFAULT_UNIT)).thenReturn(2.0)
 
         whenever(distanceHelper.calculate(airport2.latitude, airport2.longitude,
-            airport3.latitude, airport3.longitude)).thenReturn(3.0)
+            airport3.latitude, airport3.longitude, DEFAULT_UNIT)).thenReturn(3.0)
 
         val observer = subject.get().test()
 
