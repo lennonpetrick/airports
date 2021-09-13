@@ -1,5 +1,6 @@
 package com.example.airports.presentation.settings
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
@@ -37,7 +38,8 @@ private fun MainContent(
     Column(
         Modifier
             .fillMaxSize()
-            .background(Color.White)) {
+            .background(Color.White)
+    ) {
         Text(
             text = stringResource(R.string.settings_subtitle),
             style = MaterialTheme.typography.h6,
@@ -71,7 +73,7 @@ private fun ChooseOptions(
                     onClick = { onSelectedChange(option.state) }
                 )
                 Text(
-                    text = option.text,
+                    text = stringResource(option.text),
                     style = MaterialTheme.typography.subtitle1,
                     modifier = Modifier.padding(start = 16.dp)
                 )
@@ -80,7 +82,10 @@ private fun ChooseOptions(
     }
 }
 
-private sealed class UnitRadioOption(val text: String, val state: DistanceUnitState) {
+private sealed class UnitRadioOption(
+    @StringRes val text: Int,
+    val state: DistanceUnitState
+) {
 
     companion object {
         fun getList(): List<UnitRadioOption> {
@@ -88,8 +93,8 @@ private sealed class UnitRadioOption(val text: String, val state: DistanceUnitSt
         }
     }
 
-    object Kilometers : UnitRadioOption(text = "Kilometers", state = DistanceUnitState.Kilometers)
-    object Miles : UnitRadioOption(text = "Miles", state = DistanceUnitState.Miles)
+    object Kilometers : UnitRadioOption(text = R.string.settings_option_kilometers, state = DistanceUnitState.Kilometers)
+    object Miles : UnitRadioOption(text = R.string.settings_option_miles, state = DistanceUnitState.Miles)
 }
 
 @Preview

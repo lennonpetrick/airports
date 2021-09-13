@@ -5,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -40,8 +41,8 @@ fun BottomBar(navController: NavController, items: List<NavigationItem>) {
             val isSelected = currentRoute == it.route
             BottomNavigationItem(
                 selected = isSelected,
-                icon = { Icon(it.icon, contentDescription = it.label) },
-                label = { Text(text = it.label) },
+                icon = { Icon(it.icon, contentDescription = stringResource(it.label)) },
+                label = { Text(text = stringResource(it.label)) },
                 onClick = {
                     if (!isSelected) {
                         navController.navigate(it.route) {

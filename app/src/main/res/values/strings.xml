@@ -3,9 +3,14 @@
     <string name="distance_km">%s Km</string>
     <string name="distance_mile">%s Mi</string>
     <string name="generic_error">Something went wrong :(</string>
+    <string name="airport_map_screen_label">Map</string>
+    <string name="airport_list_screen_label">From Schiphol</string>
     <string name="airport_details_title">Airport info</string>
     <string name="airport_details_location">Location: %s, %s</string>
     <string name="airport_details_nearest">Nearest airport</string>
     <string name="airport_details_nearest_distance">%s from %s</string>
+    <string name="settings_screen_label">Settings</string>
     <string name="settings_subtitle">How would you like to see the distances?</string>
+    <string name="settings_option_kilometers">Kilometers</string>
+    <string name="settings_option_miles">Miles</string>
 </resources>

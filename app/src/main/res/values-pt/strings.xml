@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Aeroportos</string>
+    <string name="distance_km">%s Km</string>
+    <string name="distance_mile">%s Mi</string>
+    <string name="generic_error">Algo deu errado :(</string>
+    <string name="airport_map_screen_label">Mapa</string>
+    <string name="airport_list_screen_label">Do Schiphol</string>
+    <string name="airport_details_title">Informações do aeroporto</string>
+    <string name="airport_details_location">Localização: %s, %s</string>
+    <string name="airport_details_nearest">Aeroporto mais próximo</string>
+    <string name="airport_details_nearest_distance">%s de %s</string>
+    <string name="settings_screen_label">Configurações</string>
+    <string name="settings_subtitle">Como você gostaria de ver as distâncias?</string>
+    <string name="settings_option_kilometers">Quilômetros</string>
+    <string name="settings_option_miles">Milhas</string>
+</resources>

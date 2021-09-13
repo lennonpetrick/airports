@@ -61,7 +61,7 @@ internal fun AirportListItem(view: AirportListView) {
         Spacer(Modifier.width(10.dp))
 
         ItemText(
-            text = view.distance.let { stringResource(it.text, it.argValue!!) }
+            text = view.distance.let { stringResource(it.text, it.argValue) }
         )
     }
 }

@@ -1,5 +1,6 @@
 package com.example.airports.presentation
 
+import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Map
@@ -9,6 +10,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.airports.R
 import com.example.airports.presentation.airportlist.AirportListScreen
 import com.example.airports.presentation.airportmap.AirportMapScreen
 import com.example.airports.presentation.settings.SettingsScreen
@@ -23,7 +25,7 @@ fun Navigation(navController: NavHostController) {
 }
 
 sealed class NavigationItem(val route: String,
-                            val label: String,
+                            @StringRes val label: Int,
                             val icon: ImageVector) {
 
     companion object {
@@ -32,8 +34,7 @@ sealed class NavigationItem(val route: String,
         }
     }
 
-    // Todo show label from strings
-    object AirportMap: NavigationItem(route = "airport_map", label = "Map", icon = Icons.Default.Map)
-    object AirportList: NavigationItem(route = "airport_list", label = "From Schiphol", icon = Icons.Default.List)
-    object Settings: NavigationItem(route = "settings", label = "Settings", icon = Icons.Default.Settings)
+    object AirportMap: NavigationItem(route = "airport_map", label = R.string.airport_map_screen_label, icon = Icons.Default.Map)
+    object AirportList: NavigationItem(route = "airport_list", label = R.string.airport_list_screen_label, icon = Icons.Default.List)
+    object Settings: NavigationItem(route = "settings", label = R.string.settings_screen_label, icon = Icons.Default.Settings)
 }
