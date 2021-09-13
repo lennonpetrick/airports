@@ -18,6 +18,7 @@ internal class ClusterRenderer(
     override fun onBeforeClusterItemRendered(item: AirportMapView, markerOptions: MarkerOptions) {
         if (item.furthest) {
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+            markerOptions.zIndex(1f)
         }
     }
 
